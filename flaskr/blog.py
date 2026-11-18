@@ -22,6 +22,8 @@ def index():
         " FROM post p JOIN user u ON p.author_id = u.id"
         " ORDER BY created DESC"
     ).fetchall()
+    #for post in posts:
+    #   print("ENTRADA", dict(post))
     return render_template("blog/index.html", posts=posts)
 
 
@@ -64,6 +66,8 @@ def create():
     if request.method == "POST":
         title = request.form["title"]
         body = request.form["body"]
+        category = request.form["category"]
+        print("CATEGORY:", category)
         error = None
 
         if not title:
@@ -74,8 +78,8 @@ def create():
         else:
             db = get_db()
             db.execute(
-                "INSERT INTO post (title, body, author_id) VALUES (?, ?, ?)",
-                (title, body, g.user["id"]),
+                "INSERT INTO post (title, body, category, author_id) VALUES (?, ?, ?, ?)",
+                (title, body, category, g.user["id"]),
             )
             db.commit()
             return redirect(url_for("blog.index"))
@@ -92,6 +96,8 @@ def update(id):
     if request.method == "POST":
         title = request.form["title"]
         body = request.form["body"]
+        category = request.form["category"]
+        
         error = None
 
         if not title:
