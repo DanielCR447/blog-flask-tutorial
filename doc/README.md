@@ -2,4 +2,5 @@
 
 - [Model de dades](modeldedades.md)
 - Peticions Http
-- Mapa de peticions Http (Get / Post)(maparoutes.md)
+- [Comandes Flask](comandesflask.md)
+- [Mapa de peticions Http (Get / Post)](maparoutes.md)
